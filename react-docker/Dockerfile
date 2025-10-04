@@ -13,7 +13,6 @@ RUN addgroup app && adduser -S -G app app
 # This is done before setting the working directory and copying the files
 USER app
 
-
 # Setting the working directory to /app
 WORKDIR /app
 
@@ -22,11 +21,9 @@ WORKDIR /app
 # If the package files are not changed, docker will use the cache and will not run npm install again
 COPY package*.json ./
 
-
 # Sometimes the npm install command fails due to permission issues
 # So we need to temporarily switch to root user to run the npm install command
 USER root
-
 
 # change the ownership of the app directory to the app user
 # chown -R <user>:<group> <directory>
@@ -44,6 +41,5 @@ COPY . .
 # Exposing the port 5173
 EXPOSE 5173
 
-
-# Starting the react app
-CMD npm run dev
+# Starting the react app with host 0.0.0.0 to allow external connections
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]

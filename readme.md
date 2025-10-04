@@ -38,3 +38,11 @@ docker ps -a
 
 ## To remove all the container 
 docker container prune 
+
+## To login to the docker in cmd 
+docker login
+
+## To publish the docker image 
+docker tag image-name user-name/image-name
+
+docker push user-name/image-name
